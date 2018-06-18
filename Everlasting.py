@@ -15,34 +15,36 @@
 # 以上から,出力すべき数値は,2^(互いに独立したグループの個数)を基準として,
 # もしspecial pairが存在するならそこに1を足せばよいことになります。
 
-def root(x):
-    r = []
-    while P[x] != x:
-        r.append(x)
-        x = P[x]
-    for y in r:
-        P[y] = x
-    return x
-def data(x,y,n):
-    a = root(x)
-    c = root(y)
-    if a != c:
-        if a == x:
-            P[x] = c
-        else:
-            P[c] = a
-        n -= 1
-    return n
-def ans():
-    t = 0
-    if m >= 1:t=1
-    s = (2**n+t)%1000000007
-    return s
-while True:
-    n,m = map(int,input().strip().split(" "))
-    if n == 0:break
-    P = [i for i in range(n+1)]
-    for _ in range(m):
-        p,q = map(int,input().strip().split(" "))
-        n = data(p,q,n)
-    print(ans())
+def solve():
+    def root(x):
+        r = []
+        while P[x] != x:
+            r.append(x)
+            x = P[x]
+        for y in r:
+            P[y] = x
+        return x
+    def data(x,y,n):
+        a = root(x)
+        c = root(y)
+        if a != c:
+            if a == x:
+                P[x] = c
+            else:
+                P[c] = a
+            n -= 1
+        return n
+    def ans():
+        t = 0
+        if m >= 1:t=1
+        s = (2**n+t)%1000000007
+        return s
+    while True:
+        n,m = map(int,input().strip().split(" "))
+        if n == 0:break
+        P = [i for i in range(n+1)]
+        for _ in range(m):
+            p,q = map(int,input().strip().split(" "))
+            n = data(p,q,n)
+        print(ans())
+solve()

@@ -10,15 +10,16 @@
 
 
 P = [2]
-p = 2
+p = 3
 while p <= 10000:
     i = 0
     while i < len(P):
         if p%P[i] == 0:
             break
+        elif P[i]**2 > p:
+            P.append(p)
+            break
         i += 1
-    if i == len(P):
-        P.append(p)
     p += 1
 def prim(a):
     s,i = 0,1
@@ -33,7 +34,9 @@ def prim(a):
             r = Q.pop(0)
             q -= r
     return s
-while True:
-    n = int(input())
-    if n == 0:break
-    print(prim(n))
+def solve():
+    while True:
+        n = int(input())
+        if n == 0:break
+        print(prim(n))
+solve()

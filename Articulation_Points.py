@@ -15,35 +15,37 @@
 
 import sys
 sys.setrecursionlimit(100000)
-def dfs(s):
-    M[s] = D[s]
-    for j in reversed(range(len(A[s]))):
-        i = A[s][j]
-        if D[i] == -1:
-            if s == 0 and c[0] < 2:
-                c[0] += 1
-            A[s].pop(j)
-            A[i].remove(s)
-            D[i] = D[s] + 1
-            dfs(i)
-            if M[s] > M[i]:
-                M[s] = M[i]
-            if s != 0 and D[s] <= M[i]:
-                P.add(s)
-        elif M[s] > D[i]:
-            M[s] = D[i]
-V,E = map(int,input().strip().split(" "))
-A = [[] for i in range(V)]
-for _ in range(E):
-    s,t = map(int,input().strip().split(" "))
-    A[s].append(t)
-    A[t].append(s)
-D = [0]+[-1]*(V-1)
-M = [-1]*V
-P = set()
-c = [0]
-dfs(0)
-if c[0] > 1:
-    P.add(0)
-for i in sorted(list(P)):
-    print(i)
+def solve():
+    def dfs(s):
+        M[s] = D[s]
+        for j in reversed(range(len(A[s]))):
+            i = A[s][j]
+            if D[i] == -1:
+                if s == 0 and c[0] < 2:
+                    c[0] += 1
+                A[s].pop(j)
+                A[i].remove(s)
+                D[i] = D[s] + 1
+                dfs(i)
+                if M[s] > M[i]:
+                    M[s] = M[i]
+                if s != 0 and D[s] <= M[i]:
+                    P.add(s)
+            elif M[s] > D[i]:
+                M[s] = D[i]
+    V,E = map(int,input().strip().split(" "))
+    A = [[] for i in range(V)]
+    for _ in range(E):
+        s,t = map(int,input().strip().split(" "))
+        A[s].append(t)
+        A[t].append(s)
+    D = [0]+[-1]*(V-1)
+    M = [-1]*V
+    P = set()
+    c = [0]
+    dfs(0)
+    if c[0] > 1:
+        P.add(0)
+    for i in sorted(list(P)):
+        print(i)
+solve()
