@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# 内転判定,https://onlinejudge.u-aizu.ac.jp/#/problems/0012
+# 内点判定,https://onlinejudge.u-aizu.ac.jp/#/problems/0012
 # 右,奥
 
 # 点Pを中心として三角形の符号付き面積を考えるだけです。
